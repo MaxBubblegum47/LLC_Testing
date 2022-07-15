@@ -1,0 +1,442 @@
+Args: ./llc -march=csky void.ll -debug --print-after-isel -o - 
+'x86-64' is not a recognized processor for this target (ignoring processor)
+'+cx8' is not a recognized feature for this target (ignoring feature)
+'+fxsr' is not a recognized feature for this target (ignoring feature)
+'+mmx' is not a recognized feature for this target (ignoring feature)
+'+sse' is not a recognized feature for this target (ignoring feature)
+'+sse2' is not a recognized feature for this target (ignoring feature)
+'+x87' is not a recognized feature for this target (ignoring feature)
+'x86-64' is not a recognized processor for this target (ignoring processor)
+
+Features:+cx8,+fxsr,+mmx,+sse,+sse2,+x87
+CPU:x86-64
+TuneCPU:x86-64
+
+'x86-64' is not a recognized processor for this target (ignoring processor)
+'+cx8' is not a recognized feature for this target (ignoring feature)
+'+fxsr' is not a recognized feature for this target (ignoring feature)
+'+mmx' is not a recognized feature for this target (ignoring feature)
+'+sse' is not a recognized feature for this target (ignoring feature)
+'+sse2' is not a recognized feature for this target (ignoring feature)
+'+x87' is not a recognized feature for this target (ignoring feature)
+'x86-64' is not a recognized processor for this target (ignoring processor)
+Skipping pass 'Merge contiguous icmps into a memcmp' on function foo
+Skipping pass 'Expand memcmp() to load/stores' on function foo
+		Looking for trivial roots
+Found a new trivial root: %0
+Last visited node: %0
+		Looking for non-trivial roots
+Total: 1, Num: 2
+Discovered CFG nodes:
+0: nullptr
+1: nullptr
+2: %0
+Found roots: %0 
+---- Branch Probability Info : foo ----
+
+Computing probabilities for 
+
+block-frequency: foo
+====================
+reverse-post-order-traversal
+ - 0: 
+loop-detection
+compute-mass-in-function
+ - node: 
+  => mass:  ffffffffffffffff
+float-to-int: min = 1.0, max = 1.0, factor = 8.0
+ - : float = 1.0, scaled = 8.0, int = 8
+block-frequency-info: foo
+ - : float = 1.0, int = 8
+
+Skipping pass 'Constant Hoisting' on function foo
+Skipping pass 'Partially inline calls to library functions' on function foo
+Skipping pass 'CodeGen Prepare' on function foo
+[SafeStack] Function: foo
+[SafeStack]     safestack is not requested for this function
+		Looking for trivial roots
+Found a new trivial root: %0
+Last visited node: %0
+		Looking for non-trivial roots
+Total: 1, Num: 2
+Discovered CFG nodes:
+0: nullptr
+1: nullptr
+2: %0
+Found roots: %0 
+---- Branch Probability Info : foo ----
+
+Computing probabilities for 
+Skipping pass 'CSKY DAG->DAG Pattern Instruction Selection' on function foo
+
+Changing optimization level for Function foo
+	Before: -O2 ; After: -O0
+	FastISel is enabled
+
+
+
+=== foo
+Enabling fast-isel
+Creating new node: t1: ch = CSKYISD::RET t0
+Initial selection DAG: %bb.0 'foo:'
+SelectionDAG has 2 nodes:
+    t0: ch = EntryToken
+  t1: ch = CSKYISD::RET t0
+
+
+
+Combining: t1: ch = CSKYISD::RET t0
+
+Combining: t0: ch = EntryToken
+Optimized lowered selection DAG: %bb.0 'foo:'
+SelectionDAG has 2 nodes:
+    t0: ch = EntryToken
+  t1: ch = CSKYISD::RET t0
+
+
+Legalizing node: t0: ch = EntryToken
+Analyzing result type: ch
+Legal result type
+Legally typed node: t0: ch = EntryToken
+
+Legalizing node: t1: ch = CSKYISD::RET t0
+Analyzing result type: ch
+Legal result type
+Analyzing operand: t0: ch = EntryToken
+Legal operand
+Legally typed node: t1: ch = CSKYISD::RET t0
+
+Legalizing node: t65535: ch = handlenode t1
+Analyzing result type: ch
+Legal result type
+Analyzing operand: t1: ch = CSKYISD::RET t0
+Legal operand
+Legally typed node: t65535: ch = handlenode t1
+
+Type-legalized selection DAG: %bb.0 'foo:'
+SelectionDAG has 2 nodes:
+    t0: ch = EntryToken
+  t1: ch = CSKYISD::RET t0
+
+
+
+Legalizing: t1: ch = CSKYISD::RET t0
+Legal node: nothing to do
+
+Legalizing: t0: ch = EntryToken
+Legal node: nothing to do
+Legalized selection DAG: %bb.0 'foo:'
+SelectionDAG has 2 nodes:
+    t0: ch = EntryToken
+  t1: ch = CSKYISD::RET t0
+
+
+
+Legalizing: t1: ch = CSKYISD::RET t0
+Legal node: nothing to do
+
+Combining: t1: ch = CSKYISD::RET t0
+
+Legalizing: t0: ch = EntryToken
+Legal node: nothing to do
+
+Combining: t0: ch = EntryToken
+Optimized legalized selection DAG: %bb.0 'foo:'
+SelectionDAG has 2 nodes:
+    t0: ch = EntryToken
+  t1: ch = CSKYISD::RET t0
+
+
+===== Instruction selection begins: %bb.0 ''
+
+ISEL: Starting selection on root node: t1: ch = CSKYISD::RET t0
+ISEL: Starting pattern match
+  Morphed node: t1: ch = RTS16 t0
+ISEL: Match complete!
+
+ISEL: Starting selection on root node: t0: ch = EntryToken
+
+===== Instruction selection ends:
+Selected selection DAG: %bb.0 'foo:'
+SelectionDAG has 2 nodes:
+    t0: ch = EntryToken
+  t1: ch = RTS16 t0
+
+
+********** List Scheduling %bb.0 '' **********
+SU(0): t1: ch = RTS16 t0
+
+  # preds left       : 0
+  # succs left       : 0
+  # rdefs left       : 0
+  Latency            : 1
+  Depth              : 0
+  Height             : 0
+
+Examining Available:
+Height 0: SU(0): t1: ch = RTS16 t0
+
+
+*** Scheduling [0]: SU(0): t1: ch = RTS16 t0
+
+*** Final schedule ***
+SU(0): t1: ch = RTS16 t0
+
+
+Total amount of phi nodes to update: 0
+*** MachineFunction at end of ISel ***
+# Machine code for function foo: IsSSA, TracksLiveness
+
+bb.0 (%ir-block.0):
+  RTS16 implicit $r15
+
+# End machine code for function foo.
+
+
+Restoring optimization level for Function foo
+	Before: -O0 ; After: -O2
+# After Instruction Selection:
+# Machine code for function foo: IsSSA, TracksLiveness
+
+bb.0 (%ir-block.0):
+  RTS16 implicit $r15
+
+# End machine code for function foo.
+
+Skipping pass 'Early Tail Duplication' on function foo
+Skipping pass 'Optimize machine instruction PHIs' on function foo
+# Machine code for function foo: IsSSA, TracksLiveness
+
+0B	bb.0 (%ir-block.0):
+16B	  RTS16 implicit $r15
+
+# End machine code for function foo.
+
+********** Stack Coloring **********
+********** Function: foo
+Skipping pass 'Remove dead machine instructions' on function foo
+
+block-frequency: foo
+====================
+reverse-post-order-traversal
+ - 0: BB0[]
+loop-detection
+compute-mass-in-function
+ - node: BB0[]
+  => mass:  ffffffffffffffff
+float-to-int: min = 1.0, max = 1.0, factor = 8.0
+ - BB0[]: float = 1.0, scaled = 8.0, int = 8
+block-frequency-info: foo
+ - BB0[]: float = 1.0, int = 8
+
+Skipping pass 'Early Machine Loop Invariant Code Motion' on function foo
+
+block-frequency: foo
+====================
+reverse-post-order-traversal
+ - 0: BB0[]
+loop-detection
+compute-mass-in-function
+ - node: BB0[]
+  => mass:  ffffffffffffffff
+float-to-int: min = 1.0, max = 1.0, factor = 8.0
+ - BB0[]: float = 1.0, scaled = 8.0, int = 8
+block-frequency-info: foo
+ - BB0[]: float = 1.0, int = 8
+
+Skipping pass 'Machine Common Subexpression Elimination' on function foo
+		Looking for trivial roots
+Found a new trivial root: %bb.0
+Last visited node: %bb.0
+		Looking for non-trivial roots
+Total: 1, Num: 2
+Discovered CFG nodes:
+0: nullptr
+1: nullptr
+2: %bb.0
+Found roots: %bb.0 
+Skipping pass 'Machine code sinking' on function foo
+Skipping pass 'Peephole Optimizations' on function foo
+Skipping pass 'Remove dead machine instructions' on function foo
+Skipping Detect dead lanes pass
+********** PROCESS IMPLICIT DEFS **********
+********** Function: foo
+Skipping pass 'Two-Address instruction pass' on function foo
+********** REWRITING TWO-ADDR INSTRS **********
+********** Function: foo
+# Machine code for function foo: NoPHIs, TracksLiveness, TiedOpsRewritten
+
+0B	bb.0 (%ir-block.0):
+16B	  RTS16 implicit $r15
+
+# End machine code for function foo.
+
+Computing live-in reg-units in ABI blocks.
+Created 0 new intervals.
+********** INTERVALS **********
+RegMasks:
+********** MACHINEINSTRS **********
+# Machine code for function foo: NoPHIs, TracksLiveness, TiedOpsRewritten
+
+0B	bb.0 (%ir-block.0):
+16B	  RTS16 implicit $r15
+
+# End machine code for function foo.
+
+********** SIMPLE REGISTER COALESCING **********
+********** Function: foo
+********** JOINING INTERVALS ***********
+:
+Trying to inflate 0 regs.
+********** INTERVALS **********
+RegMasks:
+********** MACHINEINSTRS **********
+# Machine code for function foo: NoPHIs, TracksLiveness, TiedOpsRewritten
+
+0B	bb.0 (%ir-block.0):
+16B	  RTS16 implicit $r15
+
+# End machine code for function foo.
+
+Skipping pass 'Machine Instruction Scheduler' on function foo
+
+block-frequency: foo
+====================
+reverse-post-order-traversal
+ - 0: BB0[]
+loop-detection
+compute-mass-in-function
+ - node: BB0[]
+  => mass:  ffffffffffffffff
+float-to-int: min = 1.0, max = 1.0, factor = 8.0
+ - BB0[]: float = 1.0, scaled = 8.0, int = 8
+block-frequency-info: foo
+ - BB0[]: float = 1.0, int = 8
+
+********** GREEDY REGISTER ALLOCATION **********
+********** Function: foo
+********** Compute Spill Weights **********
+********** Function: foo
+********** INTERVALS **********
+RegMasks:
+********** MACHINEINSTRS **********
+# Machine code for function foo: NoPHIs, TracksLiveness, TiedOpsRewritten, TracksDebugUserValues
+
+0B	bb.0 (%ir-block.0):
+16B	  RTS16 implicit $r15
+
+# End machine code for function foo.
+
+********** REWRITE VIRTUAL REGISTERS **********
+********** Function: foo
+********** REGISTER MAP **********
+
+0B	bb.0 (%ir-block.0):
+16B	  RTS16 implicit $r15
+> RTS16 implicit $r15
+********** Stack Slot Coloring **********
+********** Function: foo
+Skipping pass 'Stack Slot Coloring' on function foo
+Skipping pass 'Machine Copy Propagation Pass' on function foo
+Skipping pass 'Machine Loop Invariant Code Motion' on function foo
+Skipping pass 'Fixup Statepoint Caller Saved' on function foo
+Skipping pass 'PostRA Machine Sink' on function foo
+
+block-frequency: foo
+====================
+reverse-post-order-traversal
+ - 0: BB0[]
+loop-detection
+compute-mass-in-function
+ - node: BB0[]
+  => mass:  ffffffffffffffff
+float-to-int: min = 1.0, max = 1.0, factor = 8.0
+ - BB0[]: float = 1.0, scaled = 8.0, int = 8
+block-frequency-info: foo
+ - BB0[]: float = 1.0, int = 8
+
+		Looking for trivial roots
+Found a new trivial root: %bb.0
+Last visited node: %bb.0
+		Looking for non-trivial roots
+Total: 1, Num: 2
+Discovered CFG nodes:
+0: nullptr
+1: nullptr
+2: %bb.0
+Found roots: %bb.0 
+Skipping pass 'Shrink Wrapping analysis' on function foo
+alloc FI(1) at SP[-4]
+alloc FI(0) at SP[-8]
+Skipping pass 'Control Flow Optimizer' on function foo
+Skipping pass 'Tail Duplication' on function foo
+Skipping pass 'Machine Copy Propagation Pass' on function foo
+Machine Function
+********** EXPANDING POST-RA PSEUDO INSTRS **********
+********** Function: foo
+real copy:   $r8 = frame-setup COPY $r14
+replaced by: $r8 = MOV32 $r14
+real copy:   $r14 = COPY $r8
+replaced by: $r14 = MOV32 $r8
+Skipping pass 'Post RA top-down list latency scheduler' on function foo
+
+block-frequency: foo
+====================
+reverse-post-order-traversal
+ - 0: BB0[]
+loop-detection
+compute-mass-in-function
+ - node: BB0[]
+  => mass:  ffffffffffffffff
+float-to-int: min = 1.0, max = 1.0, factor = 8.0
+ - BB0[]: float = 1.0, scaled = 8.0, int = 8
+block-frequency-info: foo
+ - BB0[]: float = 1.0, int = 8
+
+		Looking for trivial roots
+Found a new trivial root: %bb.0
+Last visited node: %bb.0
+		Looking for non-trivial roots
+Total: 1, Num: 2
+Discovered CFG nodes:
+0: nullptr
+1: nullptr
+2: %bb.0
+Found roots: %bb.0 
+Skipping pass 'Branch Probability Basic Block Placement' on function foo
+***** CSKYConstantIslands: 0 CP entries, aligned to 1 bytes *****
+00000000 %bb.0	 size=0x18
+Beginning CP iteration #0
+00000000 %bb.0	 size=0x18
+Beginning BR iteration #0
+00000000 %bb.0	 size=0x18
+
+00000000 %bb.0	 size=0x18
+********** COMPUTING STACKMAP LIVENESS: foo **********
+
+Debug Range Extension
+	.text
+	.file	"void.c"
+	.globl	foo                             # -- Begin function foo
+	.p2align	1
+	.type	foo,@function
+foo:                                    # @foo
+	.cfi_startproc
+# %bb.0:
+	subi16	sp, sp, 4
+	.cfi_def_cfa_offset 4
+	st32.w	l4, (sp, 0)                     # 4-byte Folded Spill
+	.cfi_offset l4, -4
+	mov16	l4, sp
+	.cfi_def_cfa_register l4
+	subi16	sp, sp, 4
+	mov16	sp, l4
+	ld32.w	l4, (sp, 0)                     # 4-byte Folded Reload
+	addi16	sp, sp, 4
+	rts16
+.Lfunc_end0:
+	.size	foo, .Lfunc_end0-foo
+	.cfi_endproc
+                                        # -- End function
+	.ident	"Debian clang version 11.0.1-2"
+	.section	".note.GNU-stack","",@progbits
